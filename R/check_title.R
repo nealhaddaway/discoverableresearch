@@ -41,13 +41,19 @@ check_title_length <- function(title){
 }
 
 #devtools::install_github("rmetaverse/metaverse", dependencies = TRUE) #Needed to access synthesisr functions (not yet on CRAN)
+write.csv(sim, "similarityscores.csv")
 
 compare_title <- function(title, testset, threshold = 0.6, matches = FALSE){
   imported_files <- synthesisr::read_refs(filename = testset)
   titles <- imported_files$title
   sim <- stringdist::stringsim(title, titles)
   dat <- data.frame(sim, imported_files)
-  hist(sim, main = "Histogram of similarity scores against test set", xlab = "Similarity score")
+  histdat <- read.csv("similarityscores.csv")
+  col1 <- rgb(0, 0, 255, max = 255, alpha = 50, names = "blue50")
+  col2 <- rgb(255, 0, 0, max = 255, alpha = 50, names = "red50")
+  hist1 <- hist(histdat$x, main = "Histogram of similarity scores against test set", xlab = "Similarity score",xlim = c(0, 1), col = col1)
+  hist2 <- hist(sim, add=TRUE, col = col2)
+  legend("topright", c("default", "input"), fill=c(col1, col2), box.lty = 0)
   output <- paste(sum(sim > threshold), 
                   if(sum(sim > threshold) == 1){
                     paste(" record from the test set have a similarity score greater than ", threshold, " in comparison to your title. See the histogram for more details. Any records above the similarity threshold of", threshold, "are provided in 'matches'.", sep = "")
