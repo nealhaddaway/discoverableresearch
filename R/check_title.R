@@ -55,7 +55,7 @@ compare_title <- function(title, testset, threshold = 0.6, matches = FALSE){
                     paste(" records from the test set have a similarity score greater than ", threshold, " in comparison to your title. See the histogram for more details. Any records above the similarity threshold of", threshold, "are provided in 'matches'.", sep = "")
                   },
                   if(sum(sim > threshold) > 1){
-                    paste("\nThis indicates that you may need to alter your title wording to improve discoverability. Check out the histogram for more details. Any records above the similarity threshold of", threshold, "are provided in 'matches'.", sep = "")
+                    paste("\nThis indicates that you may need to alter your title wording to improve discoverability. Check out the histogram for more details. Any records above the similarity threshold of ", threshold, " are provided in 'matches'.", sep = "")
                   }, sep = ""
                   )
   if(matches == TRUE){
