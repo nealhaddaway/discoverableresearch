@@ -14,19 +14,20 @@
 #' @export
 check_keywords <- function(title, abstract, keywords){
   
-  keywordoverlap <- data.frame(term = keywords, field = "Not present; good keyword candidate") #create a blank dataframe to store the results
+  keywordoverlap <- data.frame(term = keywords) #create a blank dataframe to store the results
   
-  for (i in keywords){ #loop through the keywords one at a time to see if they are in the title
-    if(grepl(tolower(i), tolower(title))==TRUE){
-      keywordoverlap <- rbind(keywordoverlap, c(tolower(i), "Already present in the title"))
-    }
+  for(i in seq_along(keywords)){ 
+    keywordoverlap$title[i] <- grepl(keywords[i], tolower(title), fixed = TRUE)
   }
-  
-  for (i in keywords){ #loop through the keywords one at a time to see if they are in the abstract  
-    if(grepl(tolower(i), tolower(abstract))==TRUE){
-      keywordoverlap <- rbind(keywordoverlap, c(tolower(i), "Already present in the abstract"))
-    }
+  for(i in seq_along(keywords)){ 
+    keywordoverlap$abstract[i] <- grepl(keywords[i], tolower(abstract), fixed = TRUE)
   }
+  keywordoverlap$posskw <- paste(keywordoverlap$title, keywordoverlap$abstract)
+  keywordoverlap$posskw <- gsub("FALSE FALSE", "Not present, possible keyword candidate", keywordoverlap$posskw)
+  keywordoverlap$posskw <- gsub("FALSE TRUE", "No, word exists in abstract", keywordoverlap$posskw)
+  keywordoverlap$posskw <- gsub("TRUE FALSE", "No, word exists in title", keywordoverlap$posskw)
+  keywordoverlap$posskw <- gsub("TRUE TRUE", "No, word exists in title and abstract", keywordoverlap$posskw)
+  keywordoverlap <- subset(keywordoverlap, select = -c(title, abstract))
   
   return(keywordoverlap)
   

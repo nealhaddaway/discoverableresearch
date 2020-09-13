@@ -1,0 +1,129 @@
+---
+title: "discoverable research vignette"
+author: "Neal Haddaway"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+description: This vignette runs through all of the package functions in discoverable research to demonstrate with a practical example how one might go about identifying potential issues with keywords that would reduce discoverability, and possible replacement terms for the title and keywords that could increase discoverability.
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+#Overview
+As authors of research articles, it is our priority to make our work as findable as possible so that it can have impact. Research articles are typically found by readers searching web-based tools with relevant search terms. These search tools may be 'search engines' (e.g. Google Scholar) or 'bibliographic databases' (e.g. Scopus or Science Citation Index Expanded). Bibliographic databases typically catalogue records based on the titles, abstracts and keywords (collectively referred to as 'topic words' in some platforms, such as Web of Science). Users then search for terms within these fields.
+
+Whilst 'systematic searches' typically involve long search strings composed of large numbers of different synonyms to account for differences in terminology used to describe a concept, people searching for research articles often use one or a small set of terms to find relevant work. 
+
+For example, someone wishing to find research about 'systematic reviews' in the field of health might enter the term `("systematic review" AND health)` in the search facility and select to search titles, abstracts and keywords. This 'Boolean' search string would bring back all records that contained both the phrase 'systematic review' and the word health in the title, abstract or keywords. However, some authors might use different terms to describe relevant research: they may have used the terms 'systematic literature review' and 'medicine' for example. 
+
+As the author of a research article, we have three key opportunities for our article to be found in this scenario: the title, the abstract and the keywords. Thus, to maximise the chances that our articles will be found, we should use DIFFERENT terminology across all three fields to make it more likely that a potential reader will find our work with a specific search. In our hypothetical example, we could have the following title, abstract and keywords:
+
+*Title: "On the use of keywords and the discoverability of systematic reviews"
+*Abstract: "In this research article, we investigate the use of different strategies for the development of article keywords by academic writers to improve the discoverability of systematic reviews. We appraise the utility of keyword diversity and provide suggestions of how to draft potential keywords for article indexing and cataloging in bibliographic databases in order to improve systematic review discoverability."
+*Keywords: systematic reviews; discoverability; keywords; indexing; cataloging; bibliographic databases
+
+#Getting started
+Firstly we can create objects containing these texts as follows:
+
+`title <- 'On the use of keywords and the discoverability of systematic reviews'`
+`abstract <- "In this research article, we investigate the use of different strategies for the development of article keywords by academic writers to improve the discoverability of systematic reviews. We appraise the utility of keyword diversity and provide suggestions of how to draft potential keywords for article indexing and cataloging in bibliographic databases in order to improve systematic review discoverability."`
+`keywords <- 'systematic reviews; discoverability; keywords; indexing; cataloging; bibliographic databases'`
+
+We can then split our keywords into a vector of strings:
+`keywords <- format_keywords(keywords, sep = ";")`
+
+`format_keywords()` automatically recognises a semicolon as a default separator unless otherwise specified, and also strips out any white space, returning a vector of keywords all in lower case.
+
+
+#Check discoverability of keywords
+We can now check the discoverability of our drafted keywords using the `check_keywords()` function:
+
+`kw_check <- check_keywords(title = title, abstract = abstract, keywords = keywords)`
+`kw_check`
+
+This provides us with a dataframe with each row consisting of a keyword and a description of whether the word already exists in the title and abstract: if not, it is considered a possible candidate for a keyword. If it is already present, then a different keyword or set of keywords would iprove discoverability.
+
+
+#Assess discoverability of the title
+We can now go further to look at how discoverable our title might be.
+
+Firstly, we can look at how long the title is and how many words in the title are useful for research discovery. Very long titles are hard to read and may lose the reader's attention, but very short titles lose chances to contain relevant search terms. Furthermore, search systems like bibliographic databases do not search for 'stop words' (words like 'and', 'the' and 'for') unless they are in a precise phrase. If our title contains lots of stop words, it may not be very discoverable.
+
+We can check the title suitability based on length with the following:
+`title_disc <- check_title_length(title)`
+`cat(title_disc)`
+
+`Your title contains 11 words in total; 5 of these words are useful for research discovery (i.e. they are not 'stop words'). This compares to a median of 7 total words (range: 4 to 53) and 5 useful search words (range: 1 to 40) in a sample of bibliographic records in PubMed (see documentation for details).Your title is therefore somewhat longer than average in total length.`
+
+`Your title has a proportional word utility of 0.45, which compares to a mean word utility of 0.73 (SD: 0.002) in the PubMed sample. You could therefore improve your title by increasing the number of useful terms (i.e. non-stop words).`
+
+We now have a report of our title length relative to a preloaded sample search that describes the comparative length of our title, and the relative proportion of title words that are stop words. The function compares your title to 10,000 titles obtained from a search for the term `research` in PubMed (Sep 2020), and provides recommendations on whether your title could be improved by increasing the proportion of title words that are not stop words.
+
+
+#Calculate title uniqueness
+We can then go further to calculate the uniqueness of our title compared with titles in a given sample. 
+
+NOTE: Unique titles are likely to be more discoverable and memorable to some extent (although uniqueness may indicate the use of inappropriate or very infrequently used terminology). Uniqueness alone does not improve discoverability and should only be thought of in the context of a diverse and appropriate set of terms used across titles, abstracts and keywords. Calculating uniqueness can identify the use of common idioms that may make it hard to identify which article is the most relevant one.
+
+We should first of all import an .ris file containing references against which we wish to compare our title:
+
+`testset <- "data/sample_titles.txt"`
+`titlecomparison <- compare_title(title, testset = testset)`
+
+The output from this function is a report describing the overall similarity between our title and the titles in the test set, along with a historgram showing the similarity scores. Depedning on a default (arbitrary) threshold similarity of 0.6, an output dataframe of similar records can be returned so that the similar records can be examined in the input .ris format. The threshold and the option to return matching records can be adjusted with `threshold = 0.5` (for example) and `matches = TRUE`.
+
+
+#Suggest keywords
+Now that we know something about whether our keywords and title are suitable and optimal for discoverability, we can go about finding suggestions of additional keywords based on analysis of our full text. Often, we will use many more relevant words in our full texts than in the title, abstract and keywords, so this can be a really useful source of synonyms. 
+
+Firstly, import the full text as a .txt or a string:
+`fulltext <- readr::read_file("data/fulltext.txt")`
+
+This text is exctracted from the publisher's HTML, so we would benefit from doing some basic tidying to remove unnecessary characters that might hamper our ability to find and separate words:
+
+*First we can replace carriage returns with spaces:
+`fulltext <- gsub("\n", " ", fulltext)`
+*Then we can replace double spaces with single spaces:
+`fulltext <- gsub("\\s+"," ",fulltext)`
+
+Now we can extract non-stop words from our full text and compare them with our draft abstract and keywords to see potential keywords:
+`poss_keywords <- suggest_keywords(title, abstract, fulltext)`
+`poss_keywords`
+
+The output is a dataframe containing a list of potential keywords of between 1 and 3 words long, a sum of the number of times they appear in the full text, and a statement regarding their suitability as keywords based on their presence in our given title and abstract.
+
+
+#Suggest title words
+We can follow a similar process to suggest title words based on a given abstract and set of keywords:
+`poss_title <- suggest_title(abstract, keywords, fulltext)`
+`poss_title`
+
+The output is a dataframe containing a list of potential title words of between 1 and 3 words long, a sum of the number of times they appear in the full text, and a statement regarding their suitability as title words based on their presence in our given abstract and keywords.
+
+
+#A better example
+To examine how a differently worded set of fields can affect discoverability, we can run the same functions on this, optimised example:
+
+`title <- "A research article investigating diverse keyword terminology and systematic reviews discoverability"`
+`abstract <-  "In this empirical manuscript, we describe the results of a study to assess the impacts of employing different strategies for the development of article keywording by academic writers to improve the effectiveness of academic searches in retrieving relevant articles, specifically within the context of evidence syntheses. We appraise the utility of terminological diversity and provide suggestions of how to draft potential synonyms for article indexing and cataloging in bibliographic databases in order to improve findability and research impact."`
+`keywords <-  "systematic reviewing; systematic literature review; abstracting; open discovery; information retrieval; informatics"`
+
+`keywords <- format_keywords(keywords, sep = ";")`
+`kw_check <- check_keywords(title = title, abstract = abstract, keywords = keywords)`
+`kw_check`
+`title_disc <- check_title_length(title)`
+`cat(title_disc)`
+`testset <- "data/sample_titles.txt"`
+`titlecomparison <- compare_title(title, testset = testset)`
+`poss_keywords <- suggest_keywords(title, abstract, fulltext)`
+`poss_keywords`
+`poss_title <- suggest_title(abstract, keywords, fulltext)`
+`poss_title`

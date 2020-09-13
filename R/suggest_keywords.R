@@ -2,7 +2,7 @@
 #'
 #' Suggests possible keywords by extracting uni-, bi-, and tri-grams from a long text (e.g. article full text), having 
 #' removed punctuation and stopwords. Returns the remaining words as a vector of strings and assesses whether they are 
-#' already present in the abstract or keywords
+#' already present in the abstract or title
 #' @param title An article title
 #' @param abstract An article abstract
 #' @param fulltext An article full text
@@ -16,8 +16,8 @@
 #' fulltext <- readr::read_file("data/fulltext.txt")
 #' fulltext <- gsub("\n", " ", fulltext)
 #' fulltext <- gsub("\\s+"," ",fulltext)
-#' poss_titlewords <- suggest_title(abstract, keywords, fulltext)
-#' poss_titlewords;
+#' poss_keywords <- suggest_keywords(title, abstract, fulltext)
+#' poss_keywords;
 #' @export
 suggest_keywords <- function(title, abstract, fulltext, suggest = FALSE){
   y <- get_tokens(fulltext)

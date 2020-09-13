@@ -15,22 +15,22 @@ check_title_length <- function(title){
   tokenlength <- length(tokens)
   output <- paste("Your title contains ", titlelength, " words in total; ", tokenlength, " of these words are useful for research discovery (i.e. they are not 'stop words'). This compares to a median of 7 total words (range: 4 to 53) and 5 useful search words (range: 1 to 40) in a sample of bibliographic records in PubMed (see documentation for details).", 
                   if(titlelength <= 7){
-                    " Your title could therefore be made longer to improve the likelihood of it being discovered in a search."
+                    " Your title could therefore be made longer to improve the likelihood of it being discovered in a search. "
                   } else {
                     "Your title is therefore somewhat longer than average in total length.\n\n"
                   }, "Your title has a proportional word utility of ", round(tokenlength/titlelength, 2), ", which compares to a mean word utility of 0.73 (SD: 0.002) in the PubMed sample.",
                   if(tokenlength/titlelength <= 0.73){
                     " You could therefore improve your title by increasing the number of useful terms (i.e. non-stop words)."
                   } else {
-                    " Your title has a relatively good utility."
+                    " Your title has a relatively good discoverability"
                   }
                   , sep = "")
-  return(cat(output))
+  return(output)
 }
 
 #' Compare title with those from a testset
 #'
-#' Check given tile for an article to assess how discoverable it is
+#' Check given title for an article to assess how discoverable it is
 #' @param title The article title: a short string
 #' @param testset A provided sample set of representative titles to compare with, entered as a .bib or .ris file
 #' @param threshold A threshold between 0 and 1 for the similarity score of titles in the sample set relative to the title provided,
@@ -49,7 +49,7 @@ compare_title <- function(title, testset = "data/sample_titles.txt", threshold =
   titles <- imported_files$title
   sim <- stringdist::stringsim(title, titles)
   dat <- data.frame(sim, imported_files)
-  hist(sim, main = "Histogram of similarity scores against test set", xlab = "Similarity score",xlim = c(0, 1), col = col1)
+  hist(sim, main = "Histogram of similarity scores against test set", xlab = "Similarity score", xlim = c(0, 1))
   output <- paste(sum(sim > threshold), 
                   if(sum(sim > threshold) == 1){
                     paste(" record from the test set have a similarity score greater than ", threshold, " in comparison to your title. See the histogram for more details. Any records above the similarity threshold of ", threshold, " are provided in the exported dataframe object.", sep = "")
@@ -57,7 +57,7 @@ compare_title <- function(title, testset = "data/sample_titles.txt", threshold =
                     paste(" records from the test set have a similarity score greater than ", threshold, " in comparison to your title. See the histogram for more details. Any records above the similarity threshold of ", threshold, " are provided in the exported dataframe object.", sep = "")
                   },
                   if(sum(sim > threshold) > 1){
-                    paste("\nThis indicates that you may need to alter your title wording to improve discoverability. Check out the histogram for more details. Any records above the similarity threshold of ", threshold, " are provided in the exported dataframe object.", sep = "")
+                    paste("\nThis indicates that you may need to alter your title wording to improve discoverability. Check out the histogram for more details. Any records above the similarity threshold of ", threshold, " are provided in the exported dataframe object (use 'matches = TRUE' to return the dataframe).", sep = "")
                   }, sep = ""
                   )
   if(matches == TRUE){
