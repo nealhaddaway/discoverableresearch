@@ -13,7 +13,7 @@ check_title_length <- function(title){
   titlelength <- sapply(strsplit(title, " "), length)
   tokens <- get_tokens(title)
   tokenlength <- length(tokens)
-  output <- paste("Your title contains ", titlelength, " words in total; ", tokenlength, " of these words are useful for research discovery (i.e. they are not 'stop words'). This compares to a median of 7 total words (range: 4 to 53) and 5 useful search words (range: 1 to 40) in a sample of bibliographic records in PubMed (see documentation for details).", 
+  output <- paste("Your title contains ", titlelength, " words in total; ", tokenlength, " of these words are useful for research discovery (i.e. they are not 'stop words'). This compares to a median of 7 total words (range: 4 to 53) and 5 useful search words (range: 1 to 40) in a sample of bibliographic records in PubMed (see documentation for details). ", 
                   if(titlelength <= 7){
                     " Your title could therefore be made longer to improve the likelihood of it being discovered in a search. "
                   } else {
