@@ -1,6 +1,6 @@
-#' Wrapper function for check_titles
+#' Check title suitability
 #'
-#' Wrapper function that runs check_title_length() and compare_title() together
+#' Check given title for an article to assess how discoverable it is based on its length and proportion of words that are non-stop words
 #' @param title The article title: a short string
 #' @return An output describing the suitability of the title for research discovery based on its length and the number of non-stop words
 #' @examples 
