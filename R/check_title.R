@@ -28,37 +28,6 @@ check_title_length <- function(title){
   return(cat(output))
 }
 
-
-#' Check title suitability
-#'
-#' Check given tile for an article to assess how discoverable it is
-#' @param title The article title: a short string
-#' @return An output describing the suitability of the title for research discovery based on its length and the number of non-stop words
-#' @examples 
-#' title <- "A methodology for systematic mapping in environmental sciences"
-#' check <- check_title_length(title)
-#' check;
-#' @export
-check_title_length <- function(title){
-  title <- tolower(title)
-  titlelength <- sapply(strsplit(title, " "), length)
-  tokens <- get_tokens(title)
-  tokenlength <- length(tokens)
-  output <- paste("Your title contains ", titlelength, " words in total; ", tokenlength, " of these words are useful for research discovery (i.e. they are not 'stop words'). This compares to a median of 7 total words (range: 4 to 53) and 5 useful search words (range: 1 to 40) in a sample of bibliographic records in PubMed (see documentation for details).", 
-                  if(titlelength <= 7){
-                    " Your title could therefore be made longer to improve the likelihood of it being discovered in a search."
-                  } else {
-                    "Your title is therefore somewhat longer than average in total length.\n\n"
-                  }, "Your title has a proportional word utility of ", round(tokenlength/titlelength, 2), ", which compares to a mean word utility of 0.73 (SD: 0.002) in the PubMed sample.",
-                  if(tokenlength/titlelength <= 0.73){
-                    " You could therefore improve your title by increasing the number of useful terms (i.e. non-stop words)."
-                  } else {
-                    " Your title has a relatively good utility."
-                  }
-                  , sep = "")
-  return(cat(output))
-}
-
 #' Compare title with those from a testset
 #'
 #' Check given tile for an article to assess how discoverable it is
