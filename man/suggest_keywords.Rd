@@ -23,7 +23,7 @@ candidates are returned.
 \description{
 Suggests possible keywords by extracting uni-, bi-, and tri-grams from a long text (e.g. article full text), having
 removed punctuation and stopwords. Returns the remaining words as a vector of strings and assesses whether they are
-already present in the abstract or keywords
+already present in the abstract or title
 }
 \examples{
 title <- "A methodology for systematic mapping in environmental sciences"
@@ -31,6 +31,6 @@ abstract <- "Systematic mapping was developed in social sciences in response to 
 fulltext <- readr::read_file("data/fulltext.txt")
 fulltext <- gsub("\n", " ", fulltext)
 fulltext <- gsub("\\\\s+"," ",fulltext)
-poss_titlewords <- suggest_title(abstract, keywords, fulltext)
-poss_titlewords;
+poss_keywords <- suggest_keywords(title, abstract, fulltext)
+poss_keywords;
 }

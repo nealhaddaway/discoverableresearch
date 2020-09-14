@@ -13,7 +13,7 @@ check_title_length(title)
 An output describing the suitability of the title for research discovery based on its length and the number of non-stop words
 }
 \description{
-Check given tile for an article to assess how discoverable it is
+Check given title for an article to assess how discoverable it is based on its length and proportion of words that are non-stop words
 }
 \examples{
 title <- "A methodology for systematic mapping in environmental sciences"

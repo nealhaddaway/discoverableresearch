@@ -26,7 +26,7 @@ above which matching titles will be printed out in 'matches'. Default threshold 
 An output describing the suitability of the title for research discovery based on a comparison with the sample set
 }
 \description{
-Check given tile for an article to assess how discoverable it is
+Check given title for an article to assess how discoverable it is
 }
 \examples{
 title <- "A methodology for systematic mapping in environmental sciences"
