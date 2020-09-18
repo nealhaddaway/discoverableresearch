@@ -16,11 +16,11 @@ The package offers the following functions:
 ## Example
 For example, consider the following record:
 
-`title <- 'On the use of keywords and the discoverability of systematic reviews'`
+`title <- "On the use of keywords and the discoverability of systematic reviews"`
 
 `abstract <- "In this research article, we investigate the use of different strategies for the development of article keywords by academic writers to improve the discoverability of systematic reviews. We appraise the utility of keyword diversity and provide suggestions of how to draft potential keywords for article indexing and cataloging in bibliographic databases in order to improve systematic review discoverability."`
 
-`keywords <- 'systematic reviews; discoverability; keywords; indexing; cataloging; bibliographic databases'`
+`keywords <- "systematic reviews; discoverability; keywords; indexing; cataloging; bibliographic databases"`
 
 It is immediately obvious that the term 'systematic reviews' exists in the title and the keywords, reducing the discoverability of the record. This package allows the user to automatically identify terms that shoudl be replaced and identify from a full text document, which other terms might be useful replacements. The following example has higher discoverability:
 
