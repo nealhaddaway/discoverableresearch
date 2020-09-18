@@ -8,12 +8,15 @@ get_tokens(text, language = "English")
 }
 \arguments{
 \item{text}{An input string}
+
+\item{language}{The language used to lookup stop words (default is "English")}
 }
 \value{
 A vector of strings consisting of the non-stop words from the 'text' input
 }
 \description{
-Removes stopwords from a text string (adapted from litsearchr) and returns the remaining words as a vector of strings
+Removes stopwords from a text string (adapted from litsearchr) and returns the remaining words as
+a vector of strings
 }
 \examples{
 text <- "A methodology for systematic mapping in environmental sciences"

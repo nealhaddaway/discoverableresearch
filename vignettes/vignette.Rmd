@@ -1,11 +1,11 @@
 ---
-title: "discoverable research vignette"
+title: "Assessing the discoverability of a research record based on title, abstract and keywords using discoverableresearch v0.0.0.9000"
 author: "Neal Haddaway"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 description: This vignette runs through all of the package functions in discoverable research to demonstrate with a practical example how one might go about identifying potential issues with keywords that would reduce discoverability, and possible replacement terms for the title and keywords that could increase discoverability.
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{Assessing the discoverability of a research record based on title, abstract and keywords using discoverableresearch v0.0.0.9000}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -109,7 +109,7 @@ We can follow a similar process to suggest title words based on a given abstract
 The output is a dataframe containing a list of potential title words of between 1 and 3 words long, a sum of the number of times they appear in the full text, and a statement regarding their suitability as title words based on their presence in our given abstract and keywords.
 
 
-#A better example
+#A better written example
 To examine how a differently worded set of fields can affect discoverability, we can run the same functions on this, optimised example:
 
 `title <- "A research article investigating diverse keyword terminology and systematic reviews discoverability"`
@@ -127,3 +127,22 @@ To examine how a differently worded set of fields can affect discoverability, we
 `poss_keywords`
 `poss_title <- suggest_title(abstract, keywords, fulltext)`
 `poss_title`
+
+
+#Overview check
+We can get an overview of the terms in the title and keywords and whether they are present in the abstract by using the 'check_fields()' function:
+
+`check <- check_fields(title, abstract, keywords)`
+
+Which provides us with a full dataframe containing all ngrams (1-, 2-, and 3- word phrases) across each specified field (after removing punctuation and stopwords), detailing in each column, which terms are present in which fields:
+
+`check$df`
+
+It also provides us with subsets for terms across each field and whether they are present in multiple fields:
+`check$tit_terms`
+`check$abs_terms`
+`check$key_terms`
+
+Finally, we can print out a report that summarises which terms could be amended or replaced to improve discoverability:
+
+`check$report`

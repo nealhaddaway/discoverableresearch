@@ -8,6 +8,8 @@ format_keywords(keywords, sep = ";")
 }
 \arguments{
 \item{keywords}{The article keywords: a vector of strings}
+
+\item{sep}{Character that separates keywords in a single string}
 }
 \value{
 A vector of lowercase keywords
@@ -16,7 +18,12 @@ A vector of lowercase keywords
 Convert string of keywords with separator into a vector
 }
 \examples{
-keywords <- c("Systematic mapping; Evidence-based environmental management; Systematic evidence synthesis; Evidence review; Knowledge gaps; Knowledge clusters")
+keywords <- c("Systematic mapping; 
+  Evidence-based environmental management; 
+  Systematic evidence synthesis; 
+  Evidence review; 
+  Knowledge gaps; 
+  Knowledge clusters")
 newkeywords <- format_keywords(keywords, sep = ";")
 newkeywords;
 }

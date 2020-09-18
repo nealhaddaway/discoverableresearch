@@ -9,7 +9,7 @@ Authors@R:
            comment = c(ORCID = "0000-0003-3902-2234"))
 Description: The package contains a suite of tools to support authors in making their research more discoverable. 
     check_keywords() - this function checks the keywords to assess whether they are already represented in the 
-    titles and abstracts. check_field_overlap() - this function compares terminology used across the title, abstract 
+    titles and abstracts. check_fields() - this function compares terminology used across the title, abstract 
     and keywords to assess where terminological diversity (i.e. the use of synonyms) could increase the likelihood 
     of the record being identified in a search. The function looks for terms in the title and abstract that also 
     exist in other fields and highlights these as needing attention. suggest_keywords() - this function takes a 
@@ -24,9 +24,11 @@ Description: The package contains a suite of tools to support authors in making 
     low utility in search engines that strip out stop words; 3)It compares the title with a given sample of record 
     titles from an .ris import and calculates a similarity score based on phrase overlap. This highlights the level 
     of uniqueness of the title.
-License: `use_mit_license()`
+License: GPL-3
 Imports: 
     dplyr,
+    graphics,
+    magrittr,
     litsearchr,      
     readr,
     stringdist,
