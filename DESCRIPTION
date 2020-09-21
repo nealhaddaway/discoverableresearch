@@ -1,5 +1,5 @@
 Package: discoverableresearch
-Title: Checks Draft Article Title, Abstract and Keywords to Optimise Discoverability
+Title: Checks Draft Article Title, Abstract and Keywords to Optimise 'Discoverability'
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "Neal",
@@ -8,22 +8,22 @@ Authors@R:
            email = "nealhaddaway@gmail.com",
            comment = c(ORCID = "0000-0003-3902-2234"))
 Description: The package contains a suite of tools to support authors in making their research more discoverable. 
-    check_keywords() - this function checks the keywords to assess whether they are already represented in the 
-    titles and abstracts. check_fields() - this function compares terminology used across the title, abstract 
+    'check_keywords()' - this function checks the keywords to assess whether they are already represented in the 
+    title and abstract. 'check_fields()' - this function compares terminology used across the title, abstract 
     and keywords to assess where terminological diversity (i.e. the use of synonyms) could increase the likelihood 
     of the record being identified in a search. The function looks for terms in the title and abstract that also 
-    exist in other fields and highlights these as needing attention. suggest_keywords() - this function takes a 
-    full text document and produces a list of unigrams, bigrams and trigrams (one-, two- or three-word phrases) 
-    present in the full text after removing stop words that do not occur in the title or abstract that may be 
-    suitable candidates for keywords. suggest_title() - this function takes a full text document and produces 
-    a list of the most frequently used unigrams, bigrams and trigrams (one-, two- or three-word phrases) after 
-    removing stop words that do not occur in the abstract or keywords that may be suitable candidates for title 
-    words. check_title() - this function carries out a number of subtasks:  2) It compares the length (number of 
-    words) of the title with the mean length of titles in major bibliographic databases to assess whether the title 
-    is likely to be too short; 2) It assesses the proportion of stop words in the title to highlight titles with 
-    low utility in search engines that strip out stop words; 3)It compares the title with a given sample of record 
-    titles from an .ris import and calculates a similarity score based on phrase overlap. This highlights the level 
-    of uniqueness of the title.
+    exist in other fields and highlights these as needing attention. 'suggest_keywords()' - this function takes a 
+    full text document and produces a list of 'unigrams', 'bigrams' and 'trigrams' (1-, 2- or 2-word phrases) 
+    present in the full text after removing 'stopwords' (words with a low utility in natural language processing) 
+    that do not occur in the title or abstract that may be suitable candidates for keywords. suggest_title() - 
+    this function takes a full text document and produces a list of the most frequently used 'unigrams', 'bigrams' 
+    and 'trigrams' after removing stop words that do not occur in the abstract or keywords that may be suitable 
+    candidates for title words. 'check_title()' - this function carries out a number of subtasks:  1) it compares 
+    the length (number of words) of the title with the mean length of titles in major bibliographic databases to 
+    assess whether the title is likely to be too short; 2) it assesses the proportion of stop words in the title 
+    to highlight titles with low utility in search engines that strip out stop words; 3) it compares the title 
+    with a given sample of record titles from an '.ris' import and calculates a similarity score based on phrase 
+    overlap. This highlights the level of uniqueness of the title.
 License: GPL-3
 Imports: 
     dplyr,
