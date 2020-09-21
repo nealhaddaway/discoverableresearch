@@ -1,6 +1,7 @@
 #' Check all field suitability
 #'
-#' Check given fields (title, abstract and keywords) for an article to assess discoverability based on similarities across the fields
+#' Check given fields (title, abstract and keywords) for an article to assess 'discoverability' based 
+#' on similarities across the fields
 #' @param title The article title: a short string
 #' @param abstract The article abstract: a string
 #' @param keywords The article keywords: a vector of strings
@@ -42,26 +43,37 @@
 #' @export
 check_fields <- function(title, abstract, keywords){
   
+  #extract 1-/2-/3- word 'ngrams' from the title and abstract
   tok_tit <- litsearchr::fakerake(title, min_n = 1, max_n = 3)
   tok_abs <- litsearchr::fakerake(abstract, min_n = 1, max_n = 3)
   
-  unique_tokens <- unique(c(tok_tit, tok_abs, tolower(keywords)))
+  #create a list of unique terms from across the title, abstract and keywords
+  unique_tokens <- unique(c(tok_tit, tok_abs, tolower(keywords))) 
   
+  # create a data frame showing whether the unique terms are present in the title or abstract or keywords
   tit_words <- NA
   abs_words <- NA
   key_words <- NA
   df <- data.frame(unique_tokens, tit_words = NA, abs_words = NA, key_words = NA)
+  # populate the data frame with 'presence/absence' for each term in each field
   df$tit_words <- unique_tokens %in% tok_tit
   df$abs_words <- unique_tokens %in% tok_abs
   df$key_words <- unique_tokens %in% tolower(keywords)
   
+  # order the terms alphabetically and remove row names
   df <- df[order(df$unique_tokens),]
   row.names(df) <- NULL
+  
+  # subset the data frame for terms present in each field
   tit_terms <- subset(df, tit_words == TRUE)
   abs_terms <- subset(df, abs_words == TRUE)
   key_terms <- subset(df, key_words == TRUE)
+  
+  # subset keywords that also appear in the title and abstract
   poor_keywords_tit <- subset(key_terms, tit_words == TRUE)[,1]
   poor_keywords_abs <- subset(key_terms, abs_words == TRUE)[,1]
+  
+  # generate a report summarising the findings
   report <- paste(
     if(length(poor_keywords_tit) < 1){
       "None of your keywords appear in the title."
@@ -77,6 +89,7 @@ check_fields <- function(title, abstract, keywords){
     }, sep = ""
     )
   
+  # return the overall assessment data frame, the subset data, and the report
   return(list(df = df, tit_terms = tit_terms, abs_terms = abs_terms, key_terms = key_terms, report = report))
 }
 

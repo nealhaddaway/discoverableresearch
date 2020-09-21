@@ -1,6 +1,7 @@
 #' Check keyword suitability
 #'
-#' Check given keywords for an article to assess whether they are already represented in the title and abstract
+#' Check given keywords for an article to assess whether they are already represented in the title and 
+#' abstract
 #' @param title The article title: a short string
 #' @param abstract The article abstract: a string
 #' @param keywords The article keywords: a vector of strings
@@ -38,14 +39,18 @@
 #' @export
 check_keywords <- function(title, abstract, keywords){
   
-  keywordoverlap <- data.frame(term = keywords) #create a blank dataframe to store the results
+  # create a blank data frame to store the results
+  keywordoverlap <- data.frame(term = keywords)
   
+  # loop through he keywords and state overlapping terms
   for(i in seq_along(keywords)){ 
     keywordoverlap$title[i] <- grepl(keywords[i], tolower(title), fixed = TRUE)
   }
   for(i in seq_along(keywords)){ 
     keywordoverlap$abstract[i] <- grepl(keywords[i], tolower(abstract), fixed = TRUE)
   }
+  
+  # concatenate title and abstract assessment, then output summary, replacing the working columns
   keywordoverlap$posskw <- paste(keywordoverlap$title, keywordoverlap$abstract)
   keywordoverlap$posskw <- gsub("FALSE FALSE", "Not present, possible keyword candidate", keywordoverlap$posskw)
   keywordoverlap$posskw <- gsub("FALSE TRUE", "No, word exists in abstract", keywordoverlap$posskw)
@@ -75,15 +80,24 @@ check_keywords <- function(title, abstract, keywords){
 #' newkeywords;
 #' @export
 format_keywords <- function(keywords, sep = ";"){
+  
+  # if a ';' separator is present, then separate terms by this
   if (grepl(";", keywords) == TRUE){
     keywords <- as.vector(strsplit(keywords, ";"))
     keywords <- unlist(keywords)
     keywords <- trimws(tolower(keywords))
+    
+    # output a lower case vector of keywords
     return(keywords)
+    
   } else {
+    
+    #otherwise, separate terms based on the user-specified separator character
     keywords <- as.vector(strsplit(keywords, sep))
     keywords <- unlist(keywords)
     keywords <- trimws(tolower(keywords))
+    
+    # output a lower case vector of keywords
     return(keywords)
   } 
 }

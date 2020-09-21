@@ -1,9 +1,9 @@
-#' Remove stopwords from text
+#' Remove stop words from text
 #'
-#' Removes stopwords from a text string (adapted from litsearchr) and returns the remaining words as 
+#' Removes stop words from a text string (adapted from 'litsearchr') and returns the remaining words as 
 #' a vector of strings
 #' @param text An input string
-#' @param language The language used to lookup stop words (default is "English")
+#' @param language The language used to look up stop words (default is "English")
 #' @return A vector of strings consisting of the non-stop words from the 'text' input
 #' @examples 
 #' text <- "A methodology for systematic mapping in environmental sciences"
@@ -12,22 +12,28 @@
 #' @importFrom magrittr "%>%"
 #' @export
 get_tokens <- function(text, language = "English"){
+  
+  # convert input text to lower case
   text <- tolower(text)
+  
+  # look up list of stop words based on the specified language and remove them from the text
   text <- tm::scan_tokenizer(tm::removeWords(text, tm::stopwords(language)))
+  
+  # return the text without the stop words
   return(text)
 }
 
 #' Suggest title words
 #'
-#' Suggests possible title words by extracting uni-, bi-, and tri-grams from a long text (e.g. article 
-#' full text), having removed punctuation and stopwords. Returns the remaining words as a vector of 
-#' strings and assesses whether they are already present in the title or abstract
+#' Suggests possible title words by extracting 'uni-', 'bi-', and 'tri-grams' from a long text (e.g. 
+#' article full text), having removed punctuation and stop words. Returns the remaining words as a 
+#' vector of strings and assesses whether they are already present in the title or abstract
 #' @param abstract An article abstract
 #' @param fulltext An article full text
 #' @param keywords An article keywords, supplied as a vector
-#' @param suggest A logical argument of TRUE or FALSE. If TRUE, the output dataframe returned is 
-#' subsetting to only include potential keywords (i.e. those not already in the abstract or keywords)
-#' @return A dataframe consisting of potential candidate title words and their suitability. If suggest 
+#' @param suggest A logical argument of TRUE or FALSE. If TRUE, the output data frame returned is 
+#' sub-setting to only include potential keywords (i.e. those not already in the abstract or keywords)
+#' @return A data frame consisting of potential candidate title words and their suitability. If suggest 
 #' = FALSE, only good candidates are returned.
 #' @examples 
 #' abstract <- "Systematic mapping was developed in social sciences in response to a lack of empirical 
@@ -65,37 +71,63 @@ get_tokens <- function(text, language = "English"){
 #' @importFrom magrittr "%>%"
 #' @export
 suggest_title <- function(abstract, keywords, fulltext, suggest = FALSE){
+  
+  # extract 'tokens' from full text (removes stop words)
   y <- get_tokens(fulltext)
+  
+  # extract 'bi-' and 'tri-grams' from full text
   z <- litsearchr::fakerake(fulltext, min_n = 2, max_n = 3)
+  
+  # bind the candidate terms together in a single vector
   w <- cbind(c(z, y))
+  
+  # remove punctuation and double spaces
   words <- litsearchr::remove_punctuation(w)
   words <- gsub("^[^a-zA-Z]+", "\\1", words)
   words <- gsub("[^a-zA-Z]+$", "\\1", words)
   words <- gsub('\\b\\w{1,3}\\b', '', words)
+  
+  # remove blank values
   words <- words[words != ""]
+  
+  # create new data frame containing the extracted words
   dat <- as.data.frame(words)
+  
+  # count the number of times each word appears in the full text
   dat$counts <- sapply(words, function(x) stringi::stri_detect_fixed(words, x)%>%
                          sum())
+  # look for each word from the full text in the keywords and report if present
   kywrds <- NA
   dat$kywrds <- logical(length(dat$words))
   for(i in seq_along(dat$words)){ 
     dat$kywrds[i] <- grepl(dat$words[i], tolower(keywords), fixed = TRUE)
   }
+  
+  # look for each word from the full text in the abstract and report if present
   dat$abstract <- logical(length(dat$words))
   for(i in seq_along(dat$words)){ 
     dat$abstract[i] <- grepl(dat$words[i], tolower(abstract), fixed = TRUE)
   }
+  
+  # concatenate assessments for abstract and keywords and generate report text for each row
   posstw <- NA
   dat$posstw <- paste(dat$abstract, dat$kywrds)
   dat$posstw <- gsub("FALSE FALSE", "Yes, possible title candidate", dat$posstw)
   dat$posstw <- gsub("FALSE TRUE", "No, word exists in keywords", dat$posstw)
   dat$posstw <- gsub("TRUE FALSE", "No, word exists in abstract", dat$posstw)
   dat$posstw <- gsub("TRUE TRUE", "No, word exists in abstract and keywords", dat$posstw)
+  
+  # if suggest = TRUE, then subset the data to show only those terms not already present in the 
+  # abstract or keywords
   if (suggest == TRUE){
     dat <- subset(dat, substr(posstw, 1, 3) == "Yes")
     dat <- subset(dat, select = -c(posstw))
   }
+  
+  # remove duplicates
   dat <- unique(dat)
   dat <- subset(dat, select = -c(abstract, kywrds))
+  
+  # return the data frame
   return(dat)
 }
