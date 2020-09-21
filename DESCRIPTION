@@ -7,7 +7,7 @@ Authors@R:
            role = c("aut", "cre"),
            email = "nealhaddaway@gmail.com",
            comment = c(ORCID = "0000-0003-3902-2234"))
-Description: The package contains a suite of tools to support authors in making their research more discoverable. 
+Description: A suite of tools are provided here to support authors in making their research more 'discoverable'. 
     'check_keywords()' - this function checks the keywords to assess whether they are already represented in the 
     title and abstract. 'check_fields()' - this function compares terminology used across the title, abstract 
     and keywords to assess where terminological diversity (i.e. the use of synonyms) could increase the likelihood 
@@ -18,7 +18,7 @@ Description: The package contains a suite of tools to support authors in making 
     that do not occur in the title or abstract that may be suitable candidates for keywords. suggest_title() - 
     this function takes a full text document and produces a list of the most frequently used 'unigrams', 'bigrams' 
     and 'trigrams' after removing stop words that do not occur in the abstract or keywords that may be suitable 
-    candidates for title words. 'check_title()' - this function carries out a number of subtasks:  1) it compares 
+    candidates for title words. 'check_title()' - this function carries out a number of sub tasks:  1) it compares 
     the length (number of words) of the title with the mean length of titles in major bibliographic databases to 
     assess whether the title is likely to be too short; 2) it assesses the proportion of stop words in the title 
     to highlight titles with low utility in search engines that strip out stop words; 3) it compares the title 
