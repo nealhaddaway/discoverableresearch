@@ -13,17 +13,17 @@ suggest_title(abstract, keywords, fulltext, suggest = FALSE)
 
 \item{fulltext}{An article full text}
 
-\item{suggest}{A logical argument of TRUE or FALSE. If TRUE, the output dataframe returned is
-subsetting to only include potential keywords (i.e. those not already in the abstract or keywords)}
+\item{suggest}{A logical argument of TRUE or FALSE. If TRUE, the output data frame returned is
+sub-setting to only include potential keywords (i.e. those not already in the abstract or keywords)}
 }
 \value{
-A dataframe consisting of potential candidate title words and their suitability. If suggest
+A data frame consisting of potential candidate title words and their suitability. If suggest
 = FALSE, only good candidates are returned.
 }
 \description{
-Suggests possible title words by extracting uni-, bi-, and tri-grams from a long text (e.g. article
-full text), having removed punctuation and stopwords. Returns the remaining words as a vector of
-strings and assesses whether they are already present in the title or abstract
+Suggests possible title words by extracting 'uni-', 'bi-', and 'tri-grams' from a long text (e.g.
+article full text), having removed punctuation and stop words. Returns the remaining words as a
+vector of strings and assesses whether they are already present in the title or abstract
 }
 \examples{
 abstract <- "Systematic mapping was developed in social sciences in response to a lack of empirical 

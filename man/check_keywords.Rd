@@ -17,7 +17,8 @@ check_keywords(title, abstract, keywords)
 A dataframe displaying the presence of the keywords in the title and abstract
 }
 \description{
-Check given keywords for an article to assess whether they are already represented in the title and abstract
+Check given keywords for an article to assess whether they are already represented in the title and
+abstract
 }
 \examples{
 title <- "A methodology for systematic mapping in environmental sciences"

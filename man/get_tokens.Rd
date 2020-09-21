@@ -2,20 +2,20 @@
 % Please edit documentation in R/suggest_title.R
 \name{get_tokens}
 \alias{get_tokens}
-\title{Remove stopwords from text}
+\title{Remove stop words from text}
 \usage{
 get_tokens(text, language = "English")
 }
 \arguments{
 \item{text}{An input string}
 
-\item{language}{The language used to lookup stop words (default is "English")}
+\item{language}{The language used to look up stop words (default is "English")}
 }
 \value{
 A vector of strings consisting of the non-stop words from the 'text' input
 }
 \description{
-Removes stopwords from a text string (adapted from litsearchr) and returns the remaining words as
+Removes stop words from a text string (adapted from 'litsearchr') and returns the remaining words as
 a vector of strings
 }
 \examples{

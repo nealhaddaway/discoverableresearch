@@ -13,16 +13,16 @@ suggest_keywords(title, abstract, fulltext, suggest = FALSE)
 
 \item{fulltext}{An article full text}
 
-\item{suggest}{A logical argument of TRUE or FALSE. If TRUE, the output dataframe returned is subsetting to only include
+\item{suggest}{A logical argument of TRUE or FALSE. If TRUE, the output data frame returned is a subset that only includes
 potential keywords (i.e. those not already in the title or abstract)}
 }
 \value{
-A dataframe consisting of potential candidate keywords and their suitability. If suggest = FALSE, only good
+A data frame consisting of potential candidate keywords and their suitability. If suggest = FALSE, only good
 candidates are returned.
 }
 \description{
-Suggests possible keywords by extracting uni-, bi-, and tri-grams from a long text (e.g. article full text), having
-removed punctuation and stopwords. Returns the remaining words as a vector of strings and assesses whether they are
+Suggests possible keywords by extracting 'uni-', 'bi-', and 'tri-grams' from a long text (e.g. article full text), having
+removed punctuation and stop words. Returns the remaining words as a vector of strings and assesses whether they are
 already present in the abstract or title
 }
 \examples{

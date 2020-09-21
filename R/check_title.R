@@ -53,6 +53,8 @@ check_title_length <- function(title){
 #' Default threshold set to 0.6 (arbitrarily)
 #' @param matches Logical argument TRUE or FALSE. If TRUE, the matches with a similarity score above 
 #' the threshold are printed to a data frame ('matches'). If FALSE, no output is provided.
+#' @param plot Logical argument TRUE or FALSE. If TRUE, a histogram of the similarity scores of test
+#' set titles compared to the title is plotted.
 #' @return A report describing the suitability of the title for research discovery based on a 
 #' comparison with the test set. If 'matches = TRUE', a list containing a report describing the 
 #' suitability of the title for research discovery based on a comparison with the test set and a 

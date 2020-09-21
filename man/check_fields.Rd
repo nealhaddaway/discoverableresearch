@@ -17,7 +17,8 @@ check_fields(title, abstract, keywords)
 A dataframe displaying the presence of the terms across the title, abstract, and keywords
 }
 \description{
-Check given fields (title, abstract and keywords) for an article to assess discoverability based on similarities across the fields
+Check given fields (title, abstract and keywords) for an article to assess 'discoverability' based
+on similarities across the fields
 }
 \examples{
 title <- "A methodology for systematic mapping in environmental sciences"

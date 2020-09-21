@@ -2,9 +2,9 @@
 % Please edit documentation in R/check_title.R
 \name{check_title}
 \alias{check_title}
-\title{Check title with those from a testset}
+\title{Check title with those from a test set}
 \usage{
-check_title(title, testset, threshold = 0.6, matches = FALSE)
+check_title(title, testset, threshold = 0.6, matches = FALSE, plot = TRUE)
 }
 \arguments{
 \item{title}{The article title: a short string}
@@ -17,11 +17,16 @@ set relative to the title provided, above which matching titles will be printed 
 Default threshold set to 0.6 (arbitrarily)}
 
 \item{matches}{Logical argument TRUE or FALSE. If TRUE, the matches with a similarity score above
-the threshold are printed to a dataframe ('matches'). If FALSE, no output is provided.}
+the threshold are printed to a data frame ('matches'). If FALSE, no output is provided.}
+
+\item{plot}{Logical argument TRUE or FALSE. If TRUE, a histogram of the similarity scores of test
+set titles compared to the title is plotted.}
 }
 \value{
-An output describing the suitability of the title for research discovery based on a
-comparison with the sample set
+A report describing the suitability of the title for research discovery based on a
+comparison with the test set. If 'matches = TRUE', a list containing a report describing the
+suitability of the title for research discovery based on a comparison with the test set and a
+database containing matches with a similarity score above the threshold value.
 }
 \description{
 Check given title for an article to assess how discoverable it is
@@ -29,5 +34,7 @@ Check given title for an article to assess how discoverable it is
 \examples{
 title <- "A methodology for systematic mapping in environmental sciences"
 testset <- system.file("extdata", "sample_titles.txt", package="discoverableresearch")
-check <- check_title(title, testset = testset, threshold = 0.7, matches = TRUE);
+check <- check_title(title, testset = testset, threshold = 0.7, matches = TRUE, plot = TRUE)
+check$output
+check$dat;
 }
