@@ -11,7 +11,7 @@
 #' tokens;
 #' @importFrom magrittr "%>%"
 #' @export
-get_tokens <- function(text, language = "English"){
+get_tokens <- function(text, language = "english"){
   
   # convert input text to lower case
   text <- tolower(text)

@@ -4,9 +4,9 @@
 \alias{get_tokens}
 \title{Remove stopwords from text}
 \usage{
-get_tokens(text, language = "English")
+get_tokens(text, language = "english")
 
-get_tokens(text, language = "English")
+get_tokens(text, language = "english")
 }
 \arguments{
 \item{text}{An input string}
