@@ -44,8 +44,8 @@
 check_fields <- function(title, abstract, keywords){
   
   #extract 1-/2-/3- word 'ngrams' from the title and abstract
-  tok_tit <- litsearchr::fakerake(title, min_n = 1, max_n = 3)
-  tok_abs <- litsearchr::fakerake(abstract, min_n = 1, max_n = 3)
+  tok_tit <- fakerake(title, min_n = 1, max_n = 3)
+  tok_abs <- fakerake(abstract, min_n = 1, max_n = 3)
   
   #create a list of unique terms from across the title, abstract and keywords
   unique_tokens <- unique(c(tok_tit, tok_abs, tolower(keywords))) 

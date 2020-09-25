@@ -23,16 +23,19 @@ Description: A suite of tools are provided here to support authors in making the
     assess whether the title is likely to be too short; 2) it assesses the proportion of stop words in the title 
     to highlight titles with low utility in search engines that strip out stop words; 3) it compares the title 
     with a given sample of record titles from an '.ris' import and calculates a similarity score based on phrase 
-    overlap. This highlights the level of uniqueness of the title.
+    overlap. This highlights the level of uniqueness of the title. This version of the package also contains 
+    functions currently in a non-CRAN package called 'litsearchr'.
 License: GPL-3
 Imports: 
     dplyr,
     graphics,
     magrittr,
-    litsearchr,      
+    ngram,
     readr,
+    stats,
     stringdist,
     stringi,
+    stopwords,
     synthesisr,
     tm
 Suggests: 
@@ -43,3 +46,5 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
+Depends: 
+    R (>= 2.10)

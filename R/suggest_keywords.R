@@ -46,13 +46,13 @@ suggest_keywords <- function(title, abstract, fulltext, suggest = FALSE){
   y <- get_tokens(fulltext)
   
   # extract 'bi-' and 'tri-grams' from full text
-  z <- litsearchr::fakerake(fulltext, min_n = 2, max_n = 3)
+  z <- fakerake(fulltext, min_n = 2, max_n = 3)
   
   # bind the candidate terms together in a single vector
   w <- cbind(c(z, y))
   
   # remove punctuation and double spaces
-  words <- litsearchr::remove_punctuation(w)
+  words <- remove_punctuation(w)
   words <- gsub("^[^a-zA-Z]+", "\\1", words)
   words <- gsub("[^a-zA-Z]+$", "\\1", words)
   words <- gsub('\\b\\w{1,3}\\b', '', words)
