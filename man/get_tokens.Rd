@@ -4,9 +4,9 @@
 \alias{get_tokens}
 \title{Remove stopwords from text}
 \usage{
-get_tokens(text, language = "english")
+get_tokens(text, language = "English")
 
-get_tokens(text, language = "english")
+get_tokens(text, language = "English")
 }
 \arguments{
 \item{text}{An input string}
@@ -21,8 +21,8 @@ A vector of strings consisting of the non-stop words from the 'text' input
 \description{
 Removes stopwords from text in whichever language is specified.
 
-Removes stop words from a text string (adapted from 'litsearchr') and returns the remaining words as
-a vector of strings
+Removes stop words from a text string (adapted from 'litsearchr' \url{https://github.com/elizagrames/litsearchr/})
+and returns the remaining words as a vector of strings
 }
 \examples{
 get_tokens("On the Origin of Species", language="English")

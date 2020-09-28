@@ -2,18 +2,18 @@
 % Please edit documentation in R/litsearchr.functions.R
 \name{get_stopwords}
 \alias{get_stopwords}
-\title{Retrieve stopwords for a given language}
+\title{Retrieve stop words for a given language}
 \usage{
 get_stopwords(language = "English")
 }
 \arguments{
-\item{language}{A character vector containing the name of the language for which to retrieve stopwords. Defaults to "English"}
+\item{language}{A character vector containing the name of the language for which to retrieve stop words. Defaults to "English"}
 }
 \value{
-Returns a character vector of stopwords.
+Returns a character vector of stop words.
 }
 \description{
-This function retrieves stopwords to use for a specified language.
+This function retrieves stop words to use for a specified language.
 }
 \examples{
 get_stopwords("English")

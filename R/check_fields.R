@@ -1,6 +1,6 @@
 #' Check all field suitability
 #'
-#' Check given fields (title, abstract and keywords) for an article to assess 'discoverability' based 
+#' Check given fields (title, abstract and keywords) for an article to assess discoverability based 
 #' on similarities across the fields
 #' @param title The article title: a short string
 #' @param abstract The article abstract: a string
@@ -43,7 +43,7 @@
 #' @export
 check_fields <- function(title, abstract, keywords){
   
-  #extract 1-/2-/3- word 'ngrams' from the title and abstract
+  #extract 1-/2-/3- word ngrams from the title and abstract
   tok_tit <- fakerake(title, min_n = 1, max_n = 3)
   tok_abs <- fakerake(abstract, min_n = 1, max_n = 3)
   
@@ -55,7 +55,7 @@ check_fields <- function(title, abstract, keywords){
   abs_words <- NA
   key_words <- NA
   df <- data.frame(unique_tokens, tit_words = NA, abs_words = NA, key_words = NA)
-  # populate the data frame with 'presence/absence' for each term in each field
+  # populate the data frame with presence/absence for each term in each field
   df$tit_words <- unique_tokens %in% tok_tit
   df$abs_words <- unique_tokens %in% tok_abs
   df$key_words <- unique_tokens %in% tolower(keywords)

@@ -1,6 +1,6 @@
 #' Suggest keywords
 #'
-#' Suggests possible keywords by extracting 'uni-', 'bi-', and 'tri-grams' from a long text (e.g. article full text), having 
+#' Suggests possible keywords by extracting uni-, bi-, and tri-grams from a long text (e.g. article full text), having 
 #' removed punctuation and stop words. Returns the remaining words as a vector of strings and assesses whether they are 
 #' already present in the abstract or title
 #' @param title An article title
@@ -42,10 +42,10 @@
 #' @export
 suggest_keywords <- function(title, abstract, fulltext, suggest = FALSE){
   
-  # extract 'tokens' from full text (removes stop words)
+  # extract tokens from full text (removes stop words)
   y <- get_tokens(fulltext)
   
-  # extract 'bi-' and 'tri-grams' from full text
+  # extract bi- and tri-grams from full text
   z <- fakerake(fulltext, min_n = 2, max_n = 3)
   
   # bind the candidate terms together in a single vector

@@ -10,7 +10,7 @@ fakerake(text, stopwords, min_n = 2, max_n = 5)
 \arguments{
 \item{text}{A string object to extract terms from}
 
-\item{stopwords}{A character vector of stopwords to remove}
+\item{stopwords}{A character vector of stop words to remove}
 
 \item{min_n}{Numeric: the minimum length ngram to consider}
 
@@ -20,5 +20,5 @@ fakerake(text, stopwords, min_n = 2, max_n = 5)
 A character vector of potential keywords
 }
 \description{
-Extracts potential keywords from text separated by stopwords
+Extracts potential keywords from text separated by stop words
 }

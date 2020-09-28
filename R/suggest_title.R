@@ -1,7 +1,7 @@
 #' Remove stop words from text
 #'
-#' Removes stop words from a text string (adapted from 'litsearchr') and returns the remaining words as 
-#' a vector of strings
+#' Removes stop words from a text string (adapted from 'litsearchr' <https://github.com/elizagrames/litsearchr/>) 
+#' and returns the remaining words as a vector of strings
 #' @param text An input string
 #' @param language The language used to look up stop words (default is "English")
 #' @return A vector of strings consisting of the non-stop words from the 'text' input
@@ -11,12 +11,13 @@
 #' tokens;
 #' @importFrom magrittr "%>%"
 #' @export
-get_tokens <- function(text, language = "english"){
+get_tokens <- function(text, language = "English"){
   
   # convert input text to lower case
   text <- tolower(text)
   
   # look up list of stop words based on the specified language and remove them from the text
+  language <- language_code(language)
   text <- tm::scan_tokenizer(tm::removeWords(text, tm::stopwords(language)))
   
   # return the text without the stop words
@@ -25,7 +26,7 @@ get_tokens <- function(text, language = "english"){
 
 #' Suggest title words
 #'
-#' Suggests possible title words by extracting 'uni-', 'bi-', and 'tri-grams' from a long text (e.g. 
+#' Suggests possible title words by extracting uni-, 'bi-, and tri-grams from a long text (e.g. 
 #' article full text), having removed punctuation and stop words. Returns the remaining words as a 
 #' vector of strings and assesses whether they are already present in the title or abstract
 #' @param abstract An article abstract
@@ -72,10 +73,10 @@ get_tokens <- function(text, language = "english"){
 #' @export
 suggest_title <- function(abstract, keywords, fulltext, suggest = FALSE){
   
-  # extract 'tokens' from full text (removes stop words)
+  # extract tokens from full text (removes stop words)
   y <- get_tokens(fulltext)
   
-  # extract 'bi-' and 'tri-grams' from full text
+  # extract bi- and tri-grams from full text
   z <- fakerake(fulltext, min_n = 2, max_n = 3)
   
   # bind the candidate terms together in a single vector

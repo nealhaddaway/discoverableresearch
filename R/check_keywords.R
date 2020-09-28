@@ -42,7 +42,7 @@ check_keywords <- function(title, abstract, keywords){
   # create a blank data frame to store the results
   keywordoverlap <- data.frame(term = keywords)
   
-  # loop through he keywords and state overlapping terms
+  # loop through the keywords and state overlapping terms
   for(i in seq_along(keywords)){ 
     keywordoverlap$title[i] <- grepl(keywords[i], tolower(title), fixed = TRUE)
   }

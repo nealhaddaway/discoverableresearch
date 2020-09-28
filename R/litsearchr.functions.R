@@ -2,9 +2,9 @@
 
 
 #' Quick keyword extraction
-#' @description Extracts potential keywords from text separated by stopwords
+#' @description Extracts potential keywords from text separated by stop words
 #' @param text A string object to extract terms from
-#' @param stopwords A character vector of stopwords to remove
+#' @param stopwords A character vector of stop words to remove
 #' @param min_n Numeric: the minimum length ngram to consider
 #' @param max_n Numeric: the maximum length ngram to consider
 #' @return A character vector of potential keywords
@@ -82,11 +82,11 @@ fakerake <- function(text,
   return(terms)
 }
 
-#' Retrieve stopwords for a given language
+#' Retrieve stop words for a given language
 #'
-#' @description This function retrieves stopwords to use for a specified language.
-#' @param language A character vector containing the name of the language for which to retrieve stopwords. Defaults to "English"
-#' @return Returns a character vector of stopwords.
+#' @description This function retrieves stop words to use for a specified language.
+#' @param language A character vector containing the name of the language for which to retrieve stop words. Defaults to "English"
+#' @return Returns a character vector of stop words.
 #' @examples get_stopwords("English")
 #' @export
 get_stopwords <- function(language = "English"){

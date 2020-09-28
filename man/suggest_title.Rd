@@ -21,7 +21,7 @@ A data frame consisting of potential candidate title words and their suitability
 = FALSE, only good candidates are returned.
 }
 \description{
-Suggests possible title words by extracting 'uni-', 'bi-', and 'tri-grams' from a long text (e.g.
+Suggests possible title words by extracting uni-, 'bi-, and tri-grams from a long text (e.g.
 article full text), having removed punctuation and stop words. Returns the remaining words as a
 vector of strings and assesses whether they are already present in the title or abstract
 }
