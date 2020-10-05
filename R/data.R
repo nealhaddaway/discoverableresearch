@@ -13,7 +13,7 @@
 #'   \item{Used}{whether or not the language is used by a scientific journal}
 #' }
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'  possible_langs
 #' }
 "possible_langs"

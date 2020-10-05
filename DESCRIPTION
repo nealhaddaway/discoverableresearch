@@ -1,5 +1,5 @@
 Package: discoverableresearch
-Title: Checks Draft Article Title, Abstract and Keywords to Optimise Discoverability
+Title: Checks Title, Abstract and Keywords to Optimise Discoverability
 Version: 0.0.1
 Authors@R: 
     person(given = "Neal",

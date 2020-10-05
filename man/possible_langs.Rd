@@ -25,7 +25,7 @@ synthesisr along with their short form, character encoding,
 and whether a scientific journal indexed in 'ulrich' uses them.
 }
 \examples{
-\dontrun{
+\donttest{
  possible_langs
 }
 }
